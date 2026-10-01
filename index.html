@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link href="https://unpkg.com/webkul-micron@1.1.6/dist/css/micron.min.css" rel="stylesheet">
+<script src="https://unpkg.com/webkul-micron@1.1.6/dist/script/micron.min.js"></script>
+    <title>Document</title>
+    <style>
+        body{
+           
+            background-color: rgba(0, 0, 0, 0.877);
+            width: 100vw;
+          min-height: 100vh;
+            display: flex;
+           flex-wrap: wrap;
+           position: relative;
+          margin: 0;
+        }
+.styles{
+    width: 15vw;
+    height: 30vh;
+    border: 1 solid  rgba(192, 192, 192, 0.562);
+    box-shadow: 0 0 5px 4px white;
+    background-color: rgba(255, 255, 255, 0.164);
+    margin: 2.5vw;
+    display: flex;
+    position: relative;
+     z-index: 1;
+}
+.text{
+    width:60%;
+    height: 90%;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    font-size: clamp(0.8rem,1vw,1.5rem);
+}
+
+.icon{
+    width:37%;
+    height: 90%;
+    background-color: silver;
+     align-self: center;
+      display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+}
+.comore{
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btnmore{
+    width: 15%;
+    height: 70%;
+background-color: gold;
+border-radius: 1vw;
+display: flex;
+justify-content: center;
+align-items: center;
+color: white;
+font-weight: bold;
+font-family: tahoma;
+letter-spacing: 2px;
+cursor: pointer;
+}
+.nav{
+    width: 100vw;
+    height: 13vh;
+    display: flex;
+   position: sticky;
+   align-items: center;
+   top: 0;
+   z-index: 100;
+   background-color: rgba(0, 0, 0, 0.596);
+    justify-content: space-around;
+}
+.styop{
+    width: 10vw;
+    height: 7vh;
+    position: relative;
+    background-color: silver;
+    border-radius: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bolder;
+   cursor: pointer;
+
+}
+.styop:hover{
+transition: all .5s ease;
+scale: 1.1;
+}
+i{
+    margin: 10%;
+}
+.search{
+    width: 15vw;
+    height: 4vh;
+    transition: all 1s;
+
+}
+.search::placeholder{
+    
+    word-spacing: 0.4vw;
+    direction: rtl;
+    text-align: center;
+   
+}
+button{
+    text-align: center;
+    width: 7vw;
+    margin-right: 1vw;
+}
+.container{
+  display: flex;
+           flex-wrap: wrap;
+           position: relative;
+          margin: 0;
+}
+/* للامانة  العلمية   اسطر ال media  quieries  من  مصدر   خارجي  من جيميناي    اي من السطر  132 لل 156 ليست من  كتابتي   و باقي ما تبقى من كتابتي الشخصية*/
+@media (max-width: 768px) {
+    .nav {
+        height: auto; 
+        flex-wrap: wrap;
+        padding: 10px 5px;
+        gap: 8px;
+    }.styop {
+        width: 28vw; 
+        height: 5vh;
+        font-size: 0.85rem;
+    } .styles {
+        width: 42vw; 
+        height: 22vh; 
+        margin: 2vw;  
+    } .nav > div:last-child {
+        width: 100%;
+        justify-content: center;
+        margin-top: 5px;
+    } .search {
+        width: 50vw;
+    } button {
+        width: 20vw;
+    } .btnmore{
+        width: 40%; 
+    }}
+    </style>
+</head>
+<body onload="getfontawesome() ">
+    <div class="nav">
+         <div class="styop  " id="home" onclick="home()">Home</div>
+        <div class="styop  " id="solid" onclick="solid()">solid</div>
+        <div class="styop regular" id="regular"  onclick="regular()">regular</div>
+        <div class="styop brands" id="brands" onclick="brands()">brands</div>
+        <div class="styop" id="favorite" onclick="fav()">Favorite</div>
+        <div style="display: flex; ">
+            <button>بحث</button>
+            <input  class="search"type="text" placeholder="ابــحــث عـن ايقــونــة ">
+        </div>
+  </div>
+  <div class="container"></div>
+    <script  >
+   
+let first=0;
+ let data;
+ localStorage.clear();
+  let array;
+        async function getfontawesome() {
+            let response=await fetch("https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/metadata/icons.json")
+            data=await response.json();
+            array=Object.keys(data);
+creaitecard(array , data);
+      
+        }
+
+
+function  creaitecard(array , data){
+    
+      for(let i=first ;i<(first+20)&&array.length;i++)
+        {
+          let a=data[array[i]].styles[0];
+        
+ let div=document.createElement('div');
+div.classList.add('styles');
+let cotext=document.createElement('div');
+let label=document.createElement('h3');
+label.innerText=data[array[i]].label;
+let classes=document.createElement('p');
+classes.innerText=` fa-${a}  fa-${array[i]} `;
+classes.setAttribute('data-micron','pop');
+cotext.classList.add('text');
+div.appendChild(cotext);
+cotext.appendChild(label);
+cotext.appendChild(classes);
+let heart=document.createElement('i');
+heart.classList.add('fa-regular');
+heart.classList.add('fa-heart');
+heart.addEventListener('click',function(){
+   if(heart.classList.contains('fa-regular'))
+   {
+     heart.classList.remove('fa-regular');
+    heart.classList.add('fa-solid');
+    heart.style.color='red';
+   if( localStorage.length==0){
+    let arr=[];
+    arr.push([data[array[i]].styles[0],array[i]]);
+    localStorage.setItem('myfav',JSON.stringify(arr))
+   }else{
+ let myfav=JSON.parse(localStorage.getItem('myfav'));
+ myfav.push([data[array[i]].styles[0],array[i]]);
+ localStorage.setItem('myfav',JSON.stringify(myfav))
+   }
+   }else{
+     heart.classList.remove('fa-solid');
+    heart.classList.add('fa-regular');
+    heart.style.color='white';
+ let myfav=JSON.parse(localStorage.getItem('myfav'));
+let index=myfav.findIndex(function(par){
+    return ((par[0]===data[array[i]].styles[0])&&(par[1]===array[i]))
+})
+myfav.splice(index,1);
+localStorage.setItem('myfav',JSON.stringify(myfav))
+   }
+})
+cotext.appendChild(heart);
+let coicon=document.createElement('div');
+coicon.classList.add('icon');
+div.appendChild(coicon);
+let icon=document.createElement('i');
+      icon.classList.add(`fa-${array[i]}`);
+       icon.classList.add(`fa-${a}`);
+        icon.classList.add(`fa-beat`);
+       coicon.appendChild(icon);
+classes.addEventListener('click', function(){
+    copytoclipboard(classes.innerText);
+})
+
+document.querySelector('.container').appendChild(div);
+
+        }
+let comore =document.createElement('div');
+comore.classList.add('comore');
+let btnmore =document.createElement('div');
+btnmore.classList.add('btnmore');
+comore.appendChild(btnmore);
+btnmore.innerText=" show more";
+btnmore.setAttribute('data-micron','groove');
+btnmore.addEventListener('click',function(){
+    setTimeout(function(){
+comore.remove();
+first+=20;
+getfontawesome() ;
+    },1000);
+})
+document.querySelector('.container').appendChild(comore);
+}
+function home(){
+    document.querySelector('.container').innerHTML='';
+     document.querySelector('#solid').style.backgroundColor='silver';
+    document.querySelector('#regular').style.backgroundColor='silver';
+     document.querySelector('#brands').style.backgroundColor='silver';
+          document.querySelector('#home').style.backgroundColor='gold';
+          document.querySelector('#favorite').style.backgroundColor='silver';
+    creaitecard(array , data);
+}
+function solid(){
+   document.querySelector('#solid').style.backgroundColor='gold';
+    document.querySelector('#regular').style.backgroundColor='silver';
+     document.querySelector('#brands').style.backgroundColor='silver';
+          document.querySelector('#home').style.backgroundColor='silver';
+              document.querySelector('#favorite').style.backgroundColor='silver';
+    document.querySelector('.container').innerHTML='';
+    for(  let i=0;i<array.length;i++)
+{
+   for(let j=0;j<data[array[i]].styles.length;j++)
+{
+       if(data[array[i]].styles[j]=='solid'){
+ let div=document.createElement('div');
+div.classList.add('styles');
+let cotext=document.createElement('div');
+let label=document.createElement('h3');
+label.innerText=data[array[i]].label;
+let classes=document.createElement('p');
+classes.innerText=` fa-${data[array[i]].styles[j]}  fa-${array[i]} `;
+classes.setAttribute('data-micron','pop');
+cotext.classList.add('text');
+div.appendChild(cotext);
+cotext.appendChild(label);
+cotext.appendChild(classes);
+document.querySelector('.container').appendChild(div);
+let coicon=document.createElement('div');
+coicon.classList.add('icon');
+div.appendChild(coicon);
+let icon=document.createElement('i');
+      icon.classList.add(`fa-${array[i]}`);
+       icon.classList.add(`fa-${data[array[i]].styles[j]}`);
+        icon.classList.add(`fa-beat`);
+       coicon.appendChild(icon);
+classes.addEventListener('click', function(){
+    copytoclipboard(classes.innerText);
+    
+})
+let heart=document.createElement('i');
+heart.classList.add('fa-regular');
+heart.classList.add('fa-heart');
+heart.addEventListener('click',function(){
+   if(heart.classList.contains('fa-regular'))
+   {
+     heart.classList.remove('fa-regular');
+    heart.classList.add('fa-solid');
+    heart.style.color='red';
+   if( localStorage.length==0){
+    let arr=[];
+    arr.push([data[array[i]].styles[j],array[i]]);
+    localStorage.setItem('myfav',JSON.stringify(arr))
+   }else{
+ let myfav=JSON.parse(localStorage.getItem('myfav'));
+ myfav.push([data[array[i]].styles[j],array[i]]);
+ localStorage.setItem('myfav',JSON.stringify(myfav))
+   }
+   }else{
+     heart.classList.remove('fa-solid');
+    heart.classList.add('fa-regular');
+    heart.style.color='white';
+ let myfav=JSON.parse(localStorage.getItem('myfav'));
+let index=myfav.findIndex(function(par){
+    return ((par[0]===data[array[i]].styles[j])&&(par[1]===array[i]))
+})
+myfav.splice(index,1);
+localStorage.setItem('myfav',JSON.stringify(myfav))
+   }
+})
+cotext.appendChild(heart);
+}
+}
+}}
+function regular(){
+    document.querySelector('#solid').style.backgroundColor='silver';
+    document.querySelector('#regular').style.backgroundColor='gold';
+       document.querySelector('#brands').style.backgroundColor='silver';
+           document.querySelector('#home').style.backgroundColor='silver';
+           document.querySelector('#favorite').style.backgroundColor='silver';
+    document.querySelector('.container').innerHTML='';
+    for( let i=0;i<array.length;i++)
+{
+   for(let j=0;j<data[array[i]].styles.length;j++)
+{
+       if(data[array[i]].styles[j]=='regular'){
+ let div=document.createElement('div');
+div.classList.add('styles');
+let cotext=document.createElement('div');
+let label=document.createElement('h3');
+label.innerText=data[array[i]].label;
+let classes=document.createElement('p');
+classes.innerText=` fa-${data[array[i]].styles[j]}  fa-${array[i]} `;
+classes.setAttribute('data-micron','pop');
+cotext.classList.add('text');
+div.appendChild(cotext);
+cotext.appendChild(label);
+cotext.appendChild(classes);
+document.querySelector('.container').appendChild(div);
+let coicon=document.createElement('div');
+coicon.classList.add('icon');
+div.appendChild(coicon);
+let icon=document.createElement('i');
+      icon.classList.add(`fa-${array[i]}`);
+       icon.classList.add(`fa-${data[array[i]].styles[j]}`);
+        icon.classList.add(`fa-beat`);
+       coicon.appendChild(icon);
+classes.addEventListener('click', function(){
+    copytoclipboard(classes.innerText);
+})
+let heart=document.createElement('i');
+heart.classList.add('fa-regular');
+heart.classList.add('fa-heart');
+heart.addEventListener('click',function(){
+   if(heart.classList.contains('fa-regular'))
+   {
+     heart.classList.remove('fa-regular');
+    heart.classList.add('fa-solid');
+    heart.style.color='red';
+   if( localStorage.length==0){
+    let arr=[];
+    arr.push([data[array[i]].styles[j],array[i]]);
+    localStorage.setItem('myfav',JSON.stringify(arr))
+   }else{
+ let myfav=JSON.parse(localStorage.getItem('myfav'));
+ myfav.push([data[array[i]].styles[j],array[i]]);
+ localStorage.setItem('myfav',JSON.stringify(myfav))
+   }
+   }else{
+     heart.classList.remove('fa-solid');
+    heart.classList.add('fa-regular');
+    heart.style.color='white';
+ let myfav=JSON.parse(localStorage.getItem('myfav'));
+let index=myfav.findIndex(function(par){
+    return ((par[0]===data[array[i]].styles[j])&&(par[1]===array[i]))
+})
+myfav.splice(index,1);
+localStorage.setItem('myfav',JSON.stringify(myfav))
+   }
+})
+cotext.appendChild(heart);
+}
+}
+}}
+function  fav(){
+     document.querySelector('#solid').style.backgroundColor='silver';
+    document.querySelector('#regular').style.backgroundColor='silver';
+       document.querySelector('#brands').style.backgroundColor='silver';
+           document.querySelector('#home').style.backgroundColor='silver';
+         document.querySelector('#favorite').style.backgroundColor='gold';
+          document.querySelector('.container').innerHTML='';
+         let myfav=JSON.parse(localStorage.getItem('myfav'));
+         for(let j=0;j<myfav.length;j++){
+     let div=document.createElement('div');
+div.classList.add('styles');
+let cotext=document.createElement('div');
+let classes=document.createElement('p');
+classes.innerText=` fa-${myfav[j][0]}  fa-${myfav[j][1]} `;
+classes.setAttribute('data-micron','pop');
+cotext.classList.add('text');
+div.appendChild(cotext);
+cotext.appendChild(classes);
+document.querySelector('.container').appendChild(div);
+let coicon=document.createElement('div');
+coicon.classList.add('icon');
+div.appendChild(coicon);
+let icon=document.createElement('i');
+      icon.classList.add(`fa-${myfav[j][1]}`);
+       icon.classList.add(`fa-${myfav[j][0]}`);
+        icon.classList.add(`fa-beat`);
+       coicon.appendChild(icon);
+classes.addEventListener('click', function(){
+    copytoclipboard(classes.innerText);
+})
+         }
+
+}
+function brands(){
+        document.querySelector('#solid').style.backgroundColor='silver';
+    document.querySelector('#regular').style.backgroundColor='silver';
+       document.querySelector('#brands').style.backgroundColor='gold';
+           document.querySelector('#home').style.backgroundColor='silver';
+           document.querySelector('#favorite').style.backgroundColor='silver';
+    document.querySelector('.container').innerHTML='';
+
+    for(  let i=0;i<array.length;i++)
+{
+   for(let j=0;j<data[array[i]].styles.length;j++)
+{
+       if(data[array[i]].styles[j]=='brands'){
+ let div=document.createElement('div');
+div.classList.add('styles');
+let cotext=document.createElement('div');
+let label=document.createElement('h3');
+label.innerText=data[array[i]].label;
+let classes=document.createElement('p');
+classes.innerText=` fa-${data[array[i]].styles[j]}  fa-${array[i]} `;
+classes.setAttribute('data-micron','pop');
+cotext.classList.add('text');
+div.appendChild(cotext);
+cotext.appendChild(label);
+cotext.appendChild(classes);
+document.querySelector('.container').appendChild(div);
+let coicon=document.createElement('div');
+coicon.classList.add('icon');
+div.appendChild(coicon);
+let icon=document.createElement('i');
+      icon.classList.add(`fa-${array[i]}`);
+       icon.classList.add(`fa-${data[array[i]].styles[j]}`);
+        icon.classList.add(`fa-beat`);
+       coicon.appendChild(icon);
+classes.addEventListener('click', function(){
+    copytoclipboard(classes.innerText);
+})
+let heart=document.createElement('i');
+heart.classList.add('fa-regular');
+heart.classList.add('fa-heart');
+heart.addEventListener('click',function(){
+   if(heart.classList.contains('fa-regular'))
+   {
+     heart.classList.remove('fa-regular');
+    heart.classList.add('fa-solid');
+    heart.style.color='red';
+   if( localStorage.length==0){
+    let arr=[];
+    arr.push([data[array[i]].styles[j],array[i]]);
+    localStorage.setItem('myfav',JSON.stringify(arr))
+   }else{
+ let myfav=JSON.parse(localStorage.getItem('myfav'));
+ myfav.push([data[array[i]].styles[j],array[i]]);
+ localStorage.setItem('myfav',JSON.stringify(myfav))
+   }
+   }else{
+     heart.classList.remove('fa-solid');
+    heart.classList.add('fa-regular');
+    heart.style.color='white';
+ let myfav=JSON.parse(localStorage.getItem('myfav'));
+let index=myfav.findIndex(function(par){
+    return ((par[0]===data[array[i]].styles[j])&&(par[1]===array[i]))
+})
+myfav.splice(index,1);
+localStorage.setItem('myfav',JSON.stringify(myfav))
+   }
+})
+cotext.appendChild(heart);
+}
+}
+}}
+        async function copytoclipboard(text) {
+          try {
+              await navigator.clipboard.writeText(text);
+          } catch (error) {
+            console.error('the error:',error);
+          }
+        }
+  setInterval(function(){
+if(localStorage.length!=0)
+{
+    let myfav=JSON.parse(localStorage.getItem('myfav'))
+    for(i=0;i<myfav.length;i++)
+{
+    console.log(myfav[i])
+}
+}
+  },5000)
+    </script>
+
+</body>
+</html>
