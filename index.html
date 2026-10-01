@@ -125,6 +125,7 @@ button{
 .container{
   display: flex;
            flex-wrap: wrap;
+           justify-content: center;
            position: relative;
           margin: 0;
 }
@@ -173,7 +174,7 @@ button{
    
 let first=0;
  let data;
- localStorage.clear();
+
   let array;
         async function getfontawesome() {
             let response=await fetch("https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/metadata/icons.json")
